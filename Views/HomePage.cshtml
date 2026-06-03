@@ -1,6 +1,56 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "_Layout.cshtml";
+    Layout = "_Layout.cshtml";
+    var heroImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("heroImage");
+    var heroPageLink = Model.Value<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>("heroPageLink");
+    var galleryPage = Model.Children().FirstOrDefault(x => x.ContentType.Alias == "galleryPage");
+    var artworks = galleryPage?.Children()
+        .OrderBy(x => Guid.NewGuid())
+        .Take(3)
+        .ToList();
 }
 
-<h1>@Model.Value("pageTitle")</h1>
+<section class="hero d-flex align-items-center justify-content-center text-center text-white"
+    style="background-image: url('@heroImage?.Url()'); background-size: cover; background-position: center; min-height: 500px;">
+    <div class="bg-dark bg-opacity-50 p-5 rounded">
+        <h1 class="display-4 fw-bold">@Model.Value("heroTitle")</h1>
+        <p class="lead my-4">@Model.Value("heroText")</p>
+        @if (heroPageLink != null)
+        {
+            <a href="@heroPageLink.Url()" class="btn btn-secondary btn-lg">@Model.Value("heroButtonText")</a>
+        }
+    </div>
+</section>
+
+<section class="container mt-5">
+    <h2 class="mb-4 text-center">Utvalda verk</h2>
+    @if (artworks != null && artworks.Any())
+    {
+        <div id="artworkCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @for (int i = 0; i < artworks.Count; i++)
+                {
+                    var artwork = artworks[i];
+                    var img = artwork.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("artImage");
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="@img?.Url()" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="@artwork.Value("artTitle")">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                            <h5>@artwork.Value("artTitle")</h5>
+                            <a href="@artwork.Url()" class="btn btn-sm btn-light">Se mer</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#artworkCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#artworkCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <p>Inga verk att visa just nu.</p>
+    }
+</section> 

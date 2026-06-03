@@ -1,6 +1,28 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "_Layout.cshtml";
+    Layout = "_Layout.cshtml";
 }
 
-<h1>@Model.Value("pageTitle")</h1>
+<div class="container mt-5">
+    <h1 class="mb-4">@Model.Value("pageTitle")</h1>
+    <p class="lead mb-5">@Model.Value("pageDescription")</p>
+    
+    <div class="row">
+        @foreach (var artwork in Model.Children())
+        {
+            var img = artwork.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("artImage");
+            <div class="col-md-4 mb-4">
+                <a href="@artwork.Url()" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@img?.Url()" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@artwork.Value("artTitle")">
+                        <div class="card-body">
+                            <h5 class="card-title">@artwork.Value("artTitle")</h5>
+                            <p class="card-text text-muted">@artwork.Value("artTechnique")</p>
+                            <p class="card-text fw-bold">@artwork.Value("artPrice")</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
