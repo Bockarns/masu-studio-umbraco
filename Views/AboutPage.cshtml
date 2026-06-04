@@ -1,6 +1,90 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "_Layout.cshtml";
+    Layout = "_Layout.cshtml";
+    var profileImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("profileImage");
+    var galleryPage = Model.Parent<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>()?.Children().FirstOrDefault(x => x.ContentType.Alias == "galleryPage");
+    var artworksForSale = galleryPage?.Children().Where(x => x.Value<bool>("artForSale")).ToList();
 }
 
-<h1>@Model.Value("pageTitle")</h1>
+<div class="container mt-5">
+    
+    <!-- Om konstnären -->
+    <div class="row mb-5">
+        <div class="col-md-4 text-center">
+            @if (profileImage != null)
+            {
+                <img src="@profileImage.Url()" class="img-fluid rounded-circle shadow" 
+                    style="width: 280px; height: 280px; object-fit: cover;" alt="MaSu">
+            }
+        </div>
+        <div class="col-md-8">
+            <h1 class="mb-3">@Model.Value("pageTitle")</h1>
+            <div>@Html.Raw(Model.Value("biography"))</div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Kontaktformulär -->
+    <div class="row mt-5" id="kontakt">
+        <div class="col-md-6">
+            <h2 class="mb-4">Kontakta oss</h2>
+            <div id="form-success" class="alert alert-success" style="display:none;">
+                Tack för ditt meddelande! Vi återkommer inom kort.
+            </div>
+            <div id="contact-form">
+                <div class="mb-3">
+                    <label class="form-label">Namn</label>
+                    <input type="text" class="form-control" id="contactName" placeholder="Ditt namn">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">E-post</label>
+                    <input type="email" class="form-control" id="contactEmail" placeholder="din@email.se">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Vilket verk är du intresserad av?</label>
+                    <select class="form-select" id="contactArtwork">
+                        <option value="">-- Välj ett verk --</option>
+                        @if (artworksForSale != null)
+                        {
+                            @foreach (var artwork in artworksForSale)
+                            {
+                                <option value="@artwork.Value("artTitle")">
+                                    @artwork.Value("artTitle") | @artwork.Value("artPrice")
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Meddelande</label>
+                    <textarea class="form-control" id="contactMessage" rows="5" 
+                        placeholder="Berätta vad du är intresserad av..."></textarea>
+                </div>
+                <button class="btn btn-lg" style="background-color: #1A3A4A; color:white;"
+                    onclick="submitForm()">Skicka meddelande</button>
+            </div>
+        </div>
+        <div class="col-md-4 offset-md-1 mt-4">
+            <h5>Kontaktuppgifter</h5>
+            <p>📧 @Model.Value("contactEmail")</p>
+            <p>📍 Stockholm, Sverige</p>
+        </div>
+    </div>
+</div>
+
+<script>
+function submitForm() {
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const message = document.getElementById('contactMessage').value;
+
+    if (!name || !email || !message) {
+        alert('Vänligen fyll i alla fält.');
+        return;
+    }
+
+    document.getElementById('contact-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+}
+</script>

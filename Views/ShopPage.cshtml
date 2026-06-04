@@ -1,6 +1,28 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "_Layout.cshtml";
+    Layout = "_Layout.cshtml";
 }
 
-<h1>@Model.Value("pageTitle")</h1>
+<section class="container mt-5">
+    <h1 class="mb-2">@Model.Value("pageTitle")</h1>
+    <p class="lead mb-5">@Model.Value("pageDescription")</p>
+
+    <div class="row">
+        @foreach (var product in Model.Children())
+        {
+            var img = product.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("productImage");
+            <div class="col-md-4 mb-4">
+                <a href="@product.Url()" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@img?.Url()" class="card-img-top" style="height: 250px; object-fit: cover;" alt="@product.Value("productName")">
+                        <div class="card-body">
+                            <h5 class="card-title">@product.Value("productName")</h5>
+                            <p class="card-text text-muted">@product.Value("productCategory")</p>
+                            <p class="card-text fw-bold">@product.Value("productPrice")</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</section>

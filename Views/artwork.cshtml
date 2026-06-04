@@ -4,12 +4,20 @@
     var img = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("artImage");
     var linkedPrint = Model.Value<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>("artLinkedPrint");
     var forSale = Model.Value<bool>("artForSale");
+    
+    var siblings = Model.Parent<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>()?.Children().ToList();
+    var currentIndex = siblings?.IndexOf(Model) ?? -1;
+    var prevArtwork = currentIndex > 0 ? siblings[currentIndex - 1] : null;
+    var nextArtwork = currentIndex < siblings?.Count - 1 ? siblings[currentIndex + 1] : null;
 }
-
-<div class="container mt-5">
+<section class="container mt-5">
     <div class="row">
         <div class="col-md-7">
-            <img src="@img?.Url()" class="img-fluid rounded shadow" alt="@Model.Value("artTitle")">
+            <a href="@img?.Url()" class="glightbox">
+                <img src="@img?.Url()" class="img-fluid rounded shadow" 
+                    alt="@Model.Value("artTitle")" 
+                    style="cursor: zoom-in; width: 100%; height: 800px; object-fit: contain; background-color: #f8f8f8;">
+            </a>
         </div>
         <div class="col-md-5">
             <h1 class="mb-3">@Model.Value("artTitle")</h1>
@@ -33,5 +41,32 @@
             }
             <a href="/galleri" class="btn btn-link mt-3 d-block">← Tillbaka till galleriet</a>
         </div>
+        <div class="d-flex justify-content-between mt-4 pt-3 border-top">
+            @if (prevArtwork != null)
+            {
+                var prevImg = prevArtwork.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("artImage");
+                <a href="@prevArtwork.Url()" class="text-decoration-none d-flex align-items-center gap-2">
+                    <img src="@prevImg?.Url()" style="width:60px; height:60px; object-fit:cover;" class="rounded">
+                    <span>← @prevArtwork.Value("artTitle")</span>
+                </a>
+            }
+            else
+            {
+                <div></div>
+            }
+
+            @if (nextArtwork != null)
+            {
+                var nextImg = nextArtwork.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("artImage");
+                <a href="@nextArtwork.Url()" class="text-decoration-none d-flex align-items-center gap-2">
+                    <span>@nextArtwork.Value("artTitle") →</span>
+                    <img src="@nextImg?.Url()" style="width:60px; height:60px; object-fit:cover;" class="rounded">
+                </a>
+            }
+            else
+            {
+                <div></div>
+            }
+        </div>
     </div>
-</div>
+</section> 

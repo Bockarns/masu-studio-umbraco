@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<section class="container mt-5">
+    <h1 class="mb-4">@Model.Value("pageTitle")</h1>
+
+    <div id="cart-empty" class="alert alert-info" style="display:none;">
+        Din varukorg är tom. <a href="/shop">Gå till butiken</a>
+    </div>
+
+    <div id="cart-items"></div>
+
+    <div id="cart-summary" style="display:none;">
+        <hr>
+        <div class="d-flex justify-content-between align-items-center">
+            <h4>Totalt: <span id="cart-total"></span></h4>
+            <button class="btn btn-lg" style="background-color: #1A3A4A; color:white;" onclick="checkout()">
+                Gå till checkout
+            </button>
+        </div>
+    </div>
+
+    <div id="checkout-message" class="alert alert-success mt-4" style="display:none;">
+        <h4>Tack för din beställning! 🎉</h4>
+        <p>Vi har tagit emot ditt intresse. En av oss återkommer till dig på e-post inom kort för att slutföra köpet.</p>
+        <a href="/" class="btn btn-outline-secondary mt-2">Tillbaka till startsidan</a>
+    </div>
+</section>
+
+<script src="/scripts/cart.js"></script>

@@ -3,11 +3,7 @@
     Layout = "_Layout.cshtml";
     var heroImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("heroImage");
     var heroPageLink = Model.Value<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>("heroPageLink");
-    var galleryPage = Model.Children().FirstOrDefault(x => x.ContentType.Alias == "galleryPage");
-    var artworks = galleryPage?.Children()
-        .OrderBy(x => Guid.NewGuid())
-        .Take(3)
-        .ToList();
+    var artworks = Model.Value<IEnumerable<Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>("featuredArtworks")?.ToList();
 }
 
 <section class="hero d-flex align-items-center justify-content-center text-center text-white"
