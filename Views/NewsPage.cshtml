@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<section class="container mt-5">
+    <h1 class="mb-2">@Model.Value("pageTitle")</h1>
+    <p class="lead mb-5">@Model.Value("pageDescription")</p>
+
+    <div class="row">
+       @foreach (var post in Model.Children().OrderByDescending(x => x.Value<DateTime>("postDate")))
+        {
+            var img = post.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("postImage");
+            var postDate = post.Value<DateTime>("postDate"); 
+            var postType = post.Value<string[]>("postType")?.FirstOrDefault() ?? "Nyhet";
+            <div class="col-md-4 mb-4">
+                <a href="@post.Url()" class="text-decoration-none text-dark">
+                    <div class="card h-100 shadow-sm">
+                        @if (img != null)
+                        {
+                            <img src="@img.Url()" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        }
+                        <div class="card-body">
+                            <span class="badge bg-secondary mb-2">@postType</span>
+                            <p class="text-muted small mb-1">
+                                @postDate.ToString("d MMMM yyyy")  @* Ren och problemfri kod här *@
+                            </p>
+                            <h5 class="card-title">@post.Value("postTitle")</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</section>
