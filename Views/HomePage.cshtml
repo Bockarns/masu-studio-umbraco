@@ -28,91 +28,96 @@
     </div>
 </section>
 
-<section class="container mt-5">
+<section class="mt-5 px-5">
     <h2 class="mb-4 text-center">Utvalda verk</h2>
-    @if (artworks != null && artworks.Any())
-    {
-        <div id="artworkCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @for (int i = 0; i < artworks.Count; i++)
+    <div class="row align-items-start">
+        
+        <!-- Senaste nyheter - vänster -->
+        <div class="col-md-2 offset-md-1">
+            <div class="card shadow-sm p-3 h-100">
+                <h6 class="fw-bold mb-3">Senaste nyheter</h6>
+                @if (latestNews != null && latestNews.Any())
                 {
-                    var artwork = artworks[i];
-                    var img = artwork.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("artImage");
-                    <div class="carousel-item @(i == 0 ? "active" : "")">
-                        <img src="@img?.Url()" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="@artwork.Value("artTitle")">
-                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-                            <h5>@artwork.Value("artTitle")</h5>
-                            <a href="@artwork.Url()" class="btn btn-sm btn-light">Se mer</a>
-                        </div>
-                    </div>
-                }
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#artworkCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#artworkCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
-    }
-    else
-    {
-        <p>Inga verk att visa just nu.</p>
-    }
-</section>
-
-<section class="container mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-6">
-            <h3 class="mb-3">Senaste nyheter</h3>
-            @if (latestNews != null && latestNews.Any())
-            {
-                <ul class="list-unstyled">
                     @foreach (var post in latestNews)
                     {
                         var postDate = post.Value<DateTime>("postDate");
-                        <li class="mb-3 pb-3 border-bottom">
-                            <p class="text-muted small mb-1">
+                        <div class="mb-3 pb-2 border-bottom">
+                            <p class="text-muted mb-0" style="font-size: 0.75rem;">
                                 @postDate.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))
                             </p>
-                            <a href="@post.Url()" class="text-decoration-none fw-bold">
+                            <a href="@post.Url()" class="text-decoration-none fw-bold" style="font-size: 0.85rem;">
                                 @post.Value("postTitle")
                             </a>
-                        </li>
+                        </div>
                     }
-                </ul>
-                <a href="/nyheter" class="btn btn-outline-secondary btn-sm">Alla nyheter →</a>
+                    <a href="/nyheter" class="btn btn-outline-secondary btn-sm w-100 mt-2">Alla nyheter →</a>
+                }
+                else
+                {
+                    <p class="text-muted small">Inga nyheter just nu.</p>
+                }
+            </div>
+        </div>
+
+        <!-- Karusell - mitten -->
+        <div class="col-md-6">
+            @if (artworks != null && artworks.Any())
+            {
+                <div id="artworkCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @for (int i = 0; i < artworks.Count; i++)
+                        {
+                            var artwork = artworks[i];
+                            var img = artwork.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("artImage");
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@img?.Url()" class="d-block w-100" style="max-height: 500px; object-fit: cover;" alt="@artwork.Value("artTitle")">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+                                    <h5>@artwork.Value("artTitle")</h5>
+                                    <a href="@artwork.Url()" class="btn btn-sm btn-light">Se mer</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#artworkCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#artworkCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
             }
             else
             {
-                <p class="text-muted">Inga nyheter just nu.</p>
+                <p>Inga verk att visa just nu.</p>
             }
         </div>
 
-        <div class="col-md-6">
-            <h3 class="mb-3">Kommande utställningar</h3>
-            @if (exhibitions != null && exhibitions.Any())
-            {
-                <ul class="list-unstyled">
+        <!-- Kommande utställningar - höger -->
+        <div class="col-md-2">
+            <div class="card shadow-sm p-3 h-100">
+                <h6 class="fw-bold mb-3">Kommande utställningar</h6>
+                @if (exhibitions != null && exhibitions.Any())
+                {
                     @foreach (var ex in exhibitions)
                     {
                         var exDate = ex.Value<DateTime>("postDate");
-                        <li class="mb-3 pb-3 border-bottom">
-                            <p class="text-muted small mb-1">
-                                📅 @exDate.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))
+                        <div class="mb-3 pb-2 border-bottom">
+                            <p class="text-muted mb-0" style="font-size: 0.75rem;">
+                                @exDate.ToString("d MMMM yyyy", new System.Globalization.CultureInfo("sv-SE"))
                             </p>
-                            <a href="@ex.Url()" class="text-decoration-none fw-bold">
+                            <a href="@ex.Url()" class="text-decoration-none fw-bold" style="font-size: 0.85rem;">
                                 @ex.Value("postTitle")
                             </a>
-                        </li>
+                        </div>
                     }
-                </ul>
-                <a href="/nyheter" class="btn btn-outline-secondary btn-sm">Alla utställningar →</a>
-            }
-            else
-            {
-                <p class="text-muted">Inga kommande utställningar just nu.</p>
-            }
+                    <a href="/nyheter" class="btn btn-outline-secondary btn-sm w-100 mt-2">Alla utställningar →</a>
+                }
+                else
+                {
+                    <p class="text-muted small">Inga kommande utställningar just nu.</p>
+                }
+            </div>
         </div>
+
     </div>
 </section>
