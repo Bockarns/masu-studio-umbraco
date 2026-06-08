@@ -10,7 +10,7 @@
         <div class="col-md-8">
             <a href="/nyheter" class="btn btn-link ps-0 mb-3">← Tillbaka till nyheter</a>
             <p class="text-muted small">
-                @postDate.ToString("d MMMM yyyy") @* Nu slipper du Razor-problemet! *@
+                @postDate.ToString("d MMMM yyyy")
             </p>
             <h1 class="mb-4">@Model.Value("postTitle")</h1>
             @if (img != null)
