@@ -11,11 +11,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <ul class="navbar-nav ms-auto text-white">
-        @foreach (var item in root.Children().Where(x => x.ContentType.Alias != "cartPage"))
+        @if (root != null)
         {
-          <li class="nav-item">
-            <a class="nav-link text-white" href="@item.Url()">@item.Name</a>
-          </li>
+            @foreach (var item in root.Children().Where(x => x.ContentType.Alias != "cartPage"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="@item.Url()">@item.Name</a>
+                </li>
+            }
         }
         <li class="nav-item">
           <a class="nav-link" href="/varukorg">
