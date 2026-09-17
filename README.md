@@ -6,7 +6,7 @@ En modern, innehållsdriven webbplats och portfölj med e-handelskaraktär utvec
 
 ## 🎨 Scenario & Syfte
 
-Webbplatsen simulerar en komplett digital närvaro för den frilansande konstnären **Ma* Su* (MaSu Studio)**. Lösningen fungerar som en kombinerad visuell portfölj, kommunikationskanal för utställningar samt en e-handelsplats för försäljning av originalkonst, reproduktioner (prints) och rekommenderat konstnärsmaterial.
+Webbplatsen simulerar en komplett digital närvaro för den frilansande konstnären **Ma* Su* **(MaSu Studio)*. Lösningen fungerar som en kombinerad visuell portfölj, kommunikationskanal för utställningar samt en e-handelsplats för försäljning av originalkonst, reproduktioner (prints) och rekommenderat konstnärsmaterial.
 
 ### Målgrupper
 * **Primär målgrupp:** Konstintresserade privatpersoner, konstsamlare, gallerister samt journalister/media som söker pressmaterial.
