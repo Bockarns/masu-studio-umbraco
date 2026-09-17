@@ -6,28 +6,33 @@ En modern, innehållsdriven webbplats och portfölj med e-handelskaraktär utvec
 
 ## 📸 Skärmdumpar
 
-**Startsida:**
+### Startsida
+
 <img width="600" alt="Startsida" src="https://github.com/user-attachments/assets/c396de07-43a3-4f4f-9c73-ba9faac39586" />
 
-**Galleri:**
+### Galleri
+
 <img width="600" alt="Galleri" src="https://github.com/user-attachments/assets/b6f79450-e549-4e13-810d-67c952ed0bf3" />
 
-**Detaljsida (konstverk):**
+### Detaljsida (konstverk)
+
 <img width="600" alt="Detaljsida" src="https://github.com/user-attachments/assets/0e465cf3-9a94-44bf-b579-4beb8eec5b72" />
 
-**Webbshop:**
+### Webbshop
+
 <img width="600" alt="Webbshop" src="https://github.com/user-attachments/assets/8514181e-fda6-4cea-b60b-b1895e618ba2" />
 
-**Varukorg:**
+### Varukorg
+
 <img width="600" alt="Varukorg" src="https://github.com/user-attachments/assets/a52a9304-d335-4f46-bb9e-c4f84e650178" />
 
-**Nyheter:**
+### Nyheter
+
 <img width="600" alt="Nyheter" src="https://github.com/user-attachments/assets/705293e1-4cda-45d2-832b-681a966e8078" />
 
-**Umbraco Backoffice – Content Tree:**
-<img width="600" alt="Content-Tree" src="https://github.com/user-attachments/assets/f5a47d55-588f-478c-a380-d79dc657f040" />
+### Umbraco Backoffice – Content Tree
 
----
+<img width="600" alt="Content-Tree" src="https://github.com/user-attachments/assets/f5a47d55-588f-478c-a380-d79dc657f040" />
 
 ## 🎨 Scenario & Syfte
 
