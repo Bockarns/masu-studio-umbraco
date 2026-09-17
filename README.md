@@ -8,7 +8,7 @@ En modern, innehållsdriven webbplats och portfölj med e-handelskaraktär utvec
 
 ### Startsida
 
-<img width="600" alt="Startsida" src="https://github.com/user-attachments/assets/c396de07-43a3-4f4f-9c73-ba9faac39586" />
+<img width="600" alt="Startsida" src="https://github.com/user-attachments/assets/3f8bbed8-04fb-4769-8e87-6ea006dcc32b" />
 
 ### Galleri
 
