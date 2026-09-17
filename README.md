@@ -74,8 +74,8 @@ Installation & Körning
 Klona repot:
 
 ```Bash
-git clone https://github.com/Bockarns/webbprojekt-ehandel-Jerome-Gordon-Bock.git
-cd webbprojekt-ehandel-Jerome-Gordon-Bock
+git clone https://github.com/Bockarns/masu-studio-umbraco.git
+cd masu-studio-umbraco
 ```
 
 Återställ paket & bygg:
@@ -93,6 +93,5 @@ dotnet run
 
 Öppna i webbläsaren:
 
-Webbplats: https://localhost:xxxx
-
-Umbraco Backoffice: https://localhost:xxxx/umbraco
+- Webbplats: https://localhost:44348
+- Umbraco Backoffice: https://localhost:44348/umbraco
