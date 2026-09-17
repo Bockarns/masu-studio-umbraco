@@ -74,7 +74,7 @@ Installation & Körning
 Klona repot:
 
 ```Bash
-git clone [https://github.com/DITT-ANVANDARNAMN/MaSu-Studio.git](https://github.com/DITT-ANVANDARNAMN/MaSu-Studio.git)
+git clone [https://github.com/Bockarns/MaSu-Studio.git](https://github.com/Bockarns/MaSu-Studio.git)
 cd MaSu-Studio
 ```
 
