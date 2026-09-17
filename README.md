@@ -74,8 +74,8 @@ Installation & Körning
 Klona repot:
 
 ```Bash
-git clone [https://github.com/Bockarns/MaSu-Studio.git](https://github.com/Bockarns/MaSu-Studio.git)
-cd MaSu-Studio
+git clone https://github.com/Bockarns/webbprojekt-ehandel-Jerome-Gordon-Bock.git
+cd webbprojekt-ehandel-Jerome-Gordon-Bock
 ```
 
 Återställ paket & bygg:
